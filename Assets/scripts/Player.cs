@@ -7,10 +7,15 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
 
-	public Text progress_text;
-	public Text hit_round_text;
-	public Text hr_text;
-	public Text message_text;
+	public GameObject progress_text_Object;
+	public GameObject hit_round_text_Object;
+	public GameObject hr_text_Object;
+	public GameObject message_text_Object;
+
+	private TextMesh progress_text;
+	private TextMesh hit_round_text;
+	private TextMesh hr_text;
+	private TextMesh message_text;
 
 	private float progress = 0f;
 	private float maxHRUpper = 170f;
@@ -25,6 +30,10 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		progress_text = progress_text_Object.GetComponent<TextMesh>();
+		hit_round_text = hit_round_text_Object.GetComponent<TextMesh>();
+		hr_text = hr_text_Object.GetComponent<TextMesh>();
+		message_text = message_text_Object.GetComponent<TextMesh>();
 		InvokeRepeating("UpdateHR", 0f, 5f);		
 	}
 
