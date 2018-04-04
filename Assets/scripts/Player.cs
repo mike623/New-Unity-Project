@@ -4,8 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using CI.HttpClient;
+
+
 
 public class Player : MonoBehaviour {
+
+	[System.Serializable]
+	class MyClass
+	{
+			public float currentHR;
+			public int currentHitRound;
+			public float progress;
+	}
+
+	
 
 	public GameObject progress_text_Object;
 	public GameObject hit_round_text_Object;
@@ -25,6 +38,7 @@ public class Player : MonoBehaviour {
 	static private float totalHitRound =  70f;
 	private float progressPerHit =  1 / totalHitRound;
 	private int currentHitRound = 0;
+	private HttpClient client = new HttpClient();
 
 	
 
@@ -69,9 +83,22 @@ public class Player : MonoBehaviour {
 		return (value - targetHRLower) / (targetHRUpper - targetHRLower);
 	}
 
+	public void Post(string msg)
+    {
+        HttpClient client = new HttpClient();
+
+        StringContent content = new StringContent(msg, System.Text.Encoding.UTF8, "application/json");
+
+        client.Post(new System.Uri("https://d9bdec95.ngrok.io/update"), content, HttpCompletionOption.AllResponseContent, (r) =>
+        {
+					Debug.LogFormat("StatusCode {0}", r.StatusCode);
+        });
+    }
+
 	// (speed (punch power, 0 - 1)  * heartrate index (0 - 1) ) (1 / 40) => progress
 	public void UpdateProgress (float hitPowerIndex) {
 		float normalizeTargetHr = this.NormalizeTargetHr(currentHR);
+
 		// Debug.LogFormat("hitPowerIndex {0}, NormalizeTargetHr {1} ", hitPowerIndex, normalizeTargetHr);
 		progress = progress + (hitPowerIndex * normalizeTargetHr * progressPerHit);
 		progress = (float)System.Math.Round(progress ,2);
@@ -102,9 +129,16 @@ public class Player : MonoBehaviour {
 		} else {
 			message_text.text = "Good punch!" + extra_message;
 		}
+		MyClass myObject = new MyClass();
+		myObject.currentHR = currentHR;
+		myObject.currentHitRound = currentHitRound;
+		myObject.progress = progress;
+		this.Post(JsonUtility.ToJson(myObject));
 	}
 
 	public void LogProgress () {
 		Debug.Log(progress);
 	}
 }
+
+
