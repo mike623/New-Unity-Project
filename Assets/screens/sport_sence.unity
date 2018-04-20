@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.22571328, b: 0.30692166, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.30692166, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -5060,8 +5060,8 @@ GameObject:
   - component: {fileID: 1237991423}
   - component: {fileID: 1237991422}
   - component: {fileID: 1237991421}
-  - component: {fileID: 1237991424}
   - component: {fileID: 1237991425}
+  - component: {fileID: 1237991424}
   m_Layer: 0
   m_Name: Bag
   m_TagString: Untagged
@@ -5128,22 +5128,22 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -28.311264
+    limit: -8.687525
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 26.844011
+    limit: 51.430843
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 177
+    limit: 20.555538
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 32.374763
+    limit: 27.322958
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -5152,8 +5152,8 @@ CharacterJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 0
-  m_MassScale: 1
+  m_EnablePreprocessing: 1
+  m_MassScale: 7.07
   m_ConnectedMassScale: 1
 --- !u!114 &1237991425
 MonoBehaviour:
